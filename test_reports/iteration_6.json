@@ -1,0 +1,32 @@
+{
+  "summary": "Backend-only regression/bug-fix verification for BRK Faturas 'Débitos Visualizado' tracking. Created /app/backend/tests/test_debitos_visualizado.py (7 pytest tests, all PASS). Confirmed: (1) POST /api/public/gerar route is registered - returns 503 'Pagamento indisponível' due to missing chave_pix (NOT 404/405), so the accidentally removed decorator is restored. (2) MAIN BUG FIXED: two POST /api/public/lead calls with the SAME session_id now create 2 'Débitos Visualizado - Usuário {documento}' activities (dedup is now scoped only to fatura creation, activity logging happens before dedup return). (3) The activity is enriched with location (IP geoloc via ip-api.com: 8.8.8.8 -> 'Ashburn, Virginia, United States'), device (desktop) and so (Windows). (4) Regression /public/acesso home still increments click counter + records location/so/device. (5) /faturas list loads; dashboard/clicks rows carry location/device/so/created_at. (6) Auth guard on /activities returns 401/403.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_debitos_visualizado.py",
+    "/app/test_reports/pytest/pytest_debitos_visualizado.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "chave_pix is not configured in settings, so /public/gerar returns 503 for real users - the full PIX generation path (200 with pix_code) could NOT be exercised end-to-end. If PIX must work in this environment, configure settings.chave_pix. Route presence is confirmed; happy-path logic was only code-reviewed, not executed.",
+    "geolocate() still does a synchronous external HTTP call to ip-api.com (free tier ~45 req/min) on every /public/lead and /public/acesso; adds latency and a third-party dependency - consider caching by IP (noted in prior iterations).",
+    "activity logging in /public/lead fires on every request regardless of session dedup (correct per the fix intent), but there is no throttling, so repeated/automated lead posts with the same documento will flood the activities feed - acceptable for the reported requirement but worth noting."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_debitos_visualizado.py"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "not tested (backend-only request)"},
+  "test_credentials": "admin donas / Seinao10@@ (from /app/memory/test_credentials.md and backend/.env). Valid.",
+  "seed_data_creation": "Tests posted public /api/public/lead and /api/public/acesso records with TEST_ cidade and documentos 98765432100 / 11122233344 (public-endpoint data, cannot be deleted via API by design). No existing data modified or deleted.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Run: export REACT_APP_BACKEND_URL=$(grep REACT_APP_BACKEND_URL /app/frontend/.env|cut -d= -f2) ADMIN_USERNAME=donas ADMIN_PASSWORD='Seinao10@@'; then pytest tests/test_debitos_visualizado.py. /public/gerar returns 503 because settings.chave_pix is empty - this is expected (config, not a route bug). Both new test files (test_acesso_tracking.py, test_debitos_visualizado.py) pass.",
+  "rca of the issue": "Reported bug: public user viewed débitos but panel did not log 'Débitos Visualizado'. Root cause: the 'Débitos Visualizado' (acesso_faturas) activity creation in /public/lead was coupled to fatura dedup - if the session already had a fatura, the endpoint returned early and never logged the activity. Additionally the @api.post('/public/gerar') decorator had been accidentally removed, leaving PIX generation without a route. Fix verified: activity is now logged BEFORE the fatura dedup return (so it fires every time, confirmed 2x for same session_id), enriched with location/so/device; and /public/gerar is routed again (503 due to missing chave_pix, not 404/405)."
+}

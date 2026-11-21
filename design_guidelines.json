@@ -1,0 +1,243 @@
+{
+  "project_name": "Donas Painel",
+  "app_type": "dashboard",
+  "route_prefix": "/donaspainel",
+  "locale": "pt-BR",
+  "overall_concept": "Executive Tactical Command Center for Public Site Invoices & Live Activity Monitoring. Delivering 'supra suma de profissionalismo' through razor-sharp telemetry, real-time activity stream, high-density metric cards, and dedicated administrative controls for PIX & Telegram integrations.",
+  "theme_strategy": {
+    "default_mode": "dark",
+    "toggle_supported": true,
+    "aesthetic_archetype": "Performance Pro / Tactical Fintech Minimalist",
+    "background_philosophy": "Deep Obsidian Base (#090D16) paired with muted slate card structures (#111827 / #1E293B) and 1px borders (#1F2937 / #334155). High contrast readability with vibrant signal indicators."
+  },
+  "typography": {
+    "display_font": "Plus Jakarta Sans",
+    "body_font": "Inter",
+    "mono_font": "JetBrains Mono",
+    "font_imports": "@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');",
+    "hierarchy": {
+      "page_title": "text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-100 font-display",
+      "section_heading": "text-lg sm:text-xl font-bold text-slate-100 font-display",
+      "card_title": "text-xs font-semibold uppercase tracking-wider text-slate-400 font-display",
+      "kpi_value": "text-2xl sm:text-3xl font-black text-slate-50 font-mono tracking-tight",
+      "table_header": "text-xs font-semibold uppercase tracking-wider text-slate-400 font-mono",
+      "body_text": "text-sm font-normal leading-relaxed text-slate-300 font-sans",
+      "code_pix": "text-xs font-mono bg-slate-950/80 text-emerald-400 border border-slate-800 rounded px-2 py-1 tracking-tight"
+    }
+  },
+  "colors": {
+    "dark": {
+      "background": "#090D16",
+      "surface_card": "#111827",
+      "surface_elevated": "#1E293B",
+      "border": "#1F2937",
+      "border_accent": "#374151",
+      "text_primary": "#F9FAFB",
+      "text_secondary": "#9CA3AF",
+      "text_muted": "#6B7280",
+      "accent_primary": "#00E699",
+      "accent_primary_hover": "#00C784",
+      "accent_blue": "#3B82F6",
+      "accent_amber": "#F59E0B",
+      "accent_purple": "#8B5CF6",
+      "status_success": "#10B981",
+      "status_warning": "#F59E0B",
+      "status_error": "#EF4444",
+      "status_info": "#0EA5E9"
+    },
+    "light": {
+      "background": "#F8FAFC",
+      "surface_card": "#FFFFFF",
+      "surface_elevated": "#F1F5F9",
+      "border": "#E2E8F0",
+      "border_accent": "#CBD5E1",
+      "text_primary": "#0F172A",
+      "text_secondary": "#475569",
+      "text_muted": "#64748B",
+      "accent_primary": "#059669",
+      "accent_primary_hover": "#047857",
+      "accent_blue": "#2563EB",
+      "accent_amber": "#D97706",
+      "status_success": "#059669",
+      "status_warning": "#D97706",
+      "status_error": "#DC2626",
+      "status_info": "#0284C7"
+    }
+  },
+  "layout_architecture": {
+    "structure": "Sidebar + Header Sticky Nav + Content Workspace",
+    "sidebar": {
+      "width": "w-64",
+      "collapsible_width": "w-20",
+      "behavior": "Sticky left sidebar with Donas logo, active page highlights, status pill, user avatar, and quick logout.",
+      "items": [
+        {"id": "nav-dashboard", "label": "Visão Geral (Dashboard)", "icon": "LayoutDashboard", "route": "/donaspainel"},
+        {"id": "nav-faturas", "label": "Faturas Geradas", "icon": "Receipt", "route": "/donaspainel/faturas"},
+        {"id": "nav-atividades", "label": "Atividade em Tempo Real", "icon": "Activity", "route": "/donaspainel/atividades"},
+        {"id": "nav-configuracoes", "label": "Configurações", "icon": "Settings", "route": "/donaspainel/configuracoes"}
+      ]
+    },
+    "header": {
+      "height": "h-16",
+      "elements": [
+        "Status do Sistema em Tempo Real (Pulsando verde: 'Serviço Ativo')",
+        "Barra de Pesquisa Rápida (Fatura #, IP, Chave PIX)",
+        "Notificações Recentes Dropdown",
+        "Seletor de Tema (Dark/Light)",
+        "Perfil Admin ('Administrador Master')"
+      ]
+    }
+  },
+  "key_features_and_pages": {
+    "login_page": {
+      "route": "/donaspainel/login",
+      "layout": "Centered Split Screen / Glassmorphic Card on Dark Background",
+      "components": [
+        "Logo 'Donas Painel' com selo de alta segurança 'Acesso Restrito'",
+        "Formulário com E-mail e Senha de Administrador",
+        "Opção 'Manter conectado' e Botão de Recuperação de Acesso",
+        "Simulação de Autenticação 2FA (Código de Segurança TOTP opcional)",
+        "Medidor de Força de Conexão Criptografada SSL 256-bit"
+      ]
+    },
+    "dashboard_view": {
+      "route": "/donaspainel",
+      "kpi_cards": [
+        {
+          "id": "kpi-faturas-total",
+          "title": "Faturas Geradas",
+          "metric": "R$ 142.850,00",
+          "subtext": "384 faturas este mês (+14.2% vs mês anterior)",
+          "badge": "+14.2%",
+          "icon": "FileText"
+        },
+        {
+          "id": "kpi-acessos-site",
+          "title": "Acessos ao Site Público",
+          "metric": "18.492",
+          "subtext": "Visitantes únicos online agora: 42",
+          "badge": "Ao Vivo",
+          "icon": "Eye"
+        },
+        {
+          "id": "kpi-pix-gerado",
+          "title": "PIX Gerados",
+          "metric": "312 Códigos",
+          "subtext": "81.2% de taxa de conversão sobre faturas",
+          "badge": "81.2%",
+          "icon": "QrCode"
+        },
+        {
+          "id": "kpi-pix-copiado",
+          "title": "PIX Copiados",
+          "metric": "289 Copia e Cola",
+          "subtext": "92.6% de engajamento do PIX gerado",
+          "badge": "92.6%",
+          "icon": "Copy"
+        }
+      ],
+      "sections": [
+        "Gráfico Principal de Acessos vs. PIX Gerados (Recharts / Chart Component)",
+        "Feed em Tempo Real Simplificado (Últimos 10 eventos em streaming)",
+        "Atalhos Rápidos (Exportar Relatório CSV, Configurar Telegram, Atualizar Chave PIX)"
+      ]
+    },
+    "faturas_view": {
+      "route": "/donaspainel/faturas",
+      "description": "Tabela completa e interativa com gerenciamento avançado das faturas geradas no site público.",
+      "features": [
+        "Filtros Rápidos por Status: Todas, Pagas, Pendentes, Expiradas, Canceladas",
+        "Busca por ID da Fatura, Nome do Cliente ou Valor",
+        "Visualizador de Código PIX Copia e Cola com botão de cópia rápida em 1-clique",
+        "Modal de Visualização do QR Code PIX e Detalhes da Fatura",
+        "Ação de Reenviar Notificação no Telegram ou Marcar como Pago Manualmente"
+      ]
+    },
+    "atividade_view": {
+      "route": "/donaspainel/atividades",
+      "description": "Log contínuo de eventos do site público em tempo real estilo terminal financeiro.",
+      "features": [
+        "Filtros por Tipo: Todos, Acesso ao Site, PIX Gerado, PIX Copiado, Fatura Expirada",
+        "Indicador de Conexão WebSocket em Tempo Real com efeito visual 'Live')",
+        "Metadados completos do evento (Endereço IP, Dispositivo/Navegador, Localização, Timestamp)",
+        "Botão para Limpar Visualização ou Pausar Feed ao Vivo"
+      ]
+    },
+    "configuracoes_view": {
+      "route": "/donaspainel/configuracoes",
+      "description": "Painel de ajuste de parâmetros administrativos essenciais.",
+      "features": [
+        {
+          "section": "1. Configuração de Chave PIX",
+          "components": [
+            "Seletor de Tipo de Chave (CPF/CNPJ, E-mail, Telefone, Chave Aleatória)",
+            "Campo de Entrada de Chave PIX com validação e máscara automática",
+            "Campo de Nome do Beneficiário / Razão Social",
+            "Campo de Cidade do Beneficiário",
+            "Botão Salvar Chave PIX com toast de confirmação instantânea"
+          ]
+        },
+        {
+          "section": "2. Notificações do Bot Telegram",
+          "components": [
+            "Campo Token do Bot Telegram (ex: 123456789:ABCdefGHI...)",
+            "Campo Chat ID do Grupo (ex: -100123456789)",
+            "Switches de Disparo de Eventos: Notificar Novo Acesso, Notificar PIX Gerado, Notificar PIX Copiado",
+            "Botão 'Disparar Notificação de Teste' no Grupo do Telegram",
+            "Status da Conexão com a API do Telegram (Conectado / Erro de Token)"
+          ]
+        }
+      ]
+    }
+  },
+  "micro_interactions": {
+    "hover_states": "Todos os cards elevam -2px no hover com borda destacada em 'border-slate-700'.",
+    "toast_notifications": "Sonner toast no canto superior direito para confirmações (PIX Copiado, Configurações Salvas, Teste Telegram Enviado).",
+    "live_indicators": "Ponto verde reluzente em 'animate-pulse' para transmissões ao vivo de atividades.",
+    "button_feedback": "Ativação instantânea com efeito de pressão 'active:scale-95'."
+  },
+  "testing_and_attributes": {
+    "general_rule": "Todos os elementos interativos e informativos chave DEVEM conter o atributo data-testid.",
+    "required_test_ids": [
+      "data-testid=\"login-email-input\"",
+      "data-testid=\"login-password-input\"",
+      "data-testid=\"login-submit-button\"",
+      "data-testid=\"sidebar-nav-dashboard\"",
+      "data-testid=\"sidebar-nav-faturas\"",
+      "data-testid=\"sidebar-nav-atividades\"",
+      "data-testid=\"sidebar-nav-configuracoes\"",
+      "data-testid=\"kpi-faturas-total-value\"",
+      "data-testid=\"kpi-acessos-site-value\"",
+      "data-testid=\"kpi-pix-gerado-value\"",
+      "data-testid=\"kpi-pix-copiado-value\"",
+      "data-testid=\"realtime-activity-feed\"",
+      "data-testid=\"faturas-table-search-input\"",
+      "data-testid=\"faturas-table-status-filter\"",
+      "data-testid=\"faturas-table-copy-pix-button\"",
+      "data-testid=\"config-pix-key-type-select\"",
+      "data-testid=\"config-pix-key-input\"",
+      "data-testid=\"config-pix-receiver-name-input\"",
+      "data-testid=\"config-pix-save-button\"",
+      "data-testid=\"config-telegram-token-input\"",
+      "data-testid=\"config-telegram-chatid-input\"",
+      "data-testid=\"config-telegram-test-button\"",
+      "data-testid=\"config-telegram-save-button\"",
+      "data-testid=\"theme-toggle-button\""
+    ]
+  },
+  "image_assets": {
+    "admin_avatar": {
+      "url": "https://images.pexels.com/photos/32729961/pexels-photo-32729961.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Portrait of a confident businessman in dark suit for admin user profile."
+    }
+  },
+  "instructions_to_main_agent": [
+    "Construa uma interface extremamente profissional, limpa e funcional em Português do Brasil para o 'Donas Painel'.",
+    "Garanta que a rota do painel seja '/donaspainel' com sistema de login dedicado e proteção de rota.",
+    "Implemente a aba de Configurações com formulários completos para Chave PIX e Bot do Telegram com botões funcionais e feedbacks via Sonner toast.",
+    "Construa o Dashboard com os 4 KPI Stat Cards exatos requisitados (Faturas Geradas, Acessos ao Site Público, PIX Gerados, PIX Copiados) + Feed de Atividades em Tempo Real.",
+    "Adicione o atributo data-testid em todos os botões, inputs, cards e links de navegação conforme especificado na lista de test_ids.",
+    "Aplicações de tabelas de faturas com filtros por status (Pendente, Pago, Expirado), busca rápida e modal de detalhes do QR Code PIX.",
+    "Utilize componentes Shadcn/UI customizados com visual escuro minimalista executive e tipografia afiada em Plus Jakarta Sans + JetBrains Mono para valores monetários e códigos."
+  ]
+}
