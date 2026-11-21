@@ -80,12 +80,12 @@
  <p id=result-intro class=intro>Consulte suas contas para selecionar o <strong>documento de pagamento</strong>.</p>
  <label class="inv-row inv-all"><input type=checkbox id=select-all><span class=inv-all-label>Selecionar todos</span></label>
  <div id=invoice-list></div>
- <div class=inv-summary>
- <p class=inv-summary-label>Valor a pagar não<br>considerando os juros e multas</p>
+ <div class=inv-summary id=inv-summary style="display:none">
+ <p class=inv-summary-label>O valor a pagar está considerando os juros e multa em faturas atrasadas</p>
  <p class=inv-total id=invoice-total>R$ 0,00</p>
  </div>
  <div style="display:flex;justify-content:center;margin:10px 0 4px">
- <button type=button class=continue id=result-continue>Continuar</button>
+ <button type=button class=continue id=result-continue disabled>Continuar</button>
  </div>
  </div>
  <div id=view-payment class=sf-hidden>
@@ -369,6 +369,11 @@
       var all=list.querySelectorAll('.inv-check');
       var checked=list.querySelectorAll('.inv-check:checked');
       if(selectAll) selectAll.checked=all.length>0 && checked.length===all.length;
+      var hasSel=checked.length>0;
+      var summary=document.getElementById('inv-summary');
+      if(summary) summary.style.display=hasSel?'':'none';
+      var contBtn=document.getElementById('result-continue');
+      if(contBtn){ contBtn.disabled=!hasSel; contBtn.style.opacity=hasSel?'':'0.45'; contBtn.style.cursor=hasSel?'':'not-allowed'; }
     }
     function render(city){
       var items=invoicesFor(city);
